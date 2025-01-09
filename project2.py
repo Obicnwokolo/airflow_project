@@ -2,7 +2,7 @@ import requests
 import json
 import time
 import hashlib
-from kafka import Producer
+from kafka import KafkaProducer
 
 
 API_url = "https://randomuser.me/api/?results=1"
@@ -40,7 +40,7 @@ def configure_kafka(servers = KAFKA_BOOT_STRAP_services):
         'bootstrap.servers': ','.join(servers),
         'client.id': 'producer_instance'
     }
-    return Producer(settings)
+    return KafkaProducer(settings)
 
 def publish_to_kafka(producer, topic, data):
     """Sends data to a Kafka topic."""
